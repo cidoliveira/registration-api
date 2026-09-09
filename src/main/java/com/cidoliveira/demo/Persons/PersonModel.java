@@ -1,9 +1,12 @@
-package com.cidoliveira.demo;
+package com.cidoliveira.demo.Persons;
 
+import com.cidoliveira.demo.Tasks.TasksModel;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@Table(name = "tb_register")
+@Table(name = "tb_persons")
 public class PersonModel {
 
     @Id
@@ -12,6 +15,11 @@ public class PersonModel {
     private String personName;
     private String personEmail;
     private int personAge;
+
+    @ManyToOne
+    @JoinColumn(name = "tasks_id")
+    private TasksModel userTasks;
+
 
     public PersonModel() {
     }

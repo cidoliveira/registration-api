@@ -1,4 +1,4 @@
-package com.cidoliveira.demo;
+package com.cidoliveira.demo.Persons;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
