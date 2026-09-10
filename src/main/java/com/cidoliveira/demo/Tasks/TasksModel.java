@@ -17,8 +17,13 @@ public class TasksModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "task_id")
     private long taskId;
+
+    @Column(name = "task_name")
     private String taskName;
+
+    @Column(name = "task_difficulty")
     private String taskDifficulty;
 
     @OneToMany(mappedBy = "userTasks")

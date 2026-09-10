@@ -17,10 +17,16 @@ public class PersonModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "person_id")
     private Long personId;
+
+    @Column(name = "person_name")
     private String personName;
+
     @Column(unique = true)
     private String personEmail;
+
+    @Column(name = "person_age")
     private int personAge;
 
     @ManyToOne
