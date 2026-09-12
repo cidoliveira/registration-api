@@ -1,6 +1,6 @@
-package com.cidoliveira.demo.Tasks;
+package com.cidoliveira.api_cadastro.Tasks;
 
-import com.cidoliveira.demo.Persons.PersonModel;
+import com.cidoliveira.api_cadastro.Persons.PersonModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

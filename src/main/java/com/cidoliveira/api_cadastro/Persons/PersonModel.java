@@ -1,12 +1,10 @@
-package com.cidoliveira.demo.Persons;
+package com.cidoliveira.api_cadastro.Persons;
 
-import com.cidoliveira.demo.Tasks.TasksModel;
+import com.cidoliveira.api_cadastro.Tasks.TasksModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Table(name = "tb_persons")
