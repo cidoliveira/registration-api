@@ -32,9 +32,9 @@ public class PersonController {
     }
 
     //Search person by ID
-    @GetMapping("/getpersonID")
-    public String getPersonByID() {
-        return "Showing person in database with searched ID";
+    @GetMapping("/getperson/{id}")
+    public PersonModel getPersonByID(@PathVariable Long id) {
+        return personService.listPersonByID(id);
     }
 
     //Change person data
