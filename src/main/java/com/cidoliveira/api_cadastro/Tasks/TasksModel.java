@@ -1,6 +1,7 @@
 package com.cidoliveira.api_cadastro.Tasks;
 
 import com.cidoliveira.api_cadastro.Persons.PersonModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class TasksModel {
     private String taskDifficulty;
 
     @OneToMany(mappedBy = "userTasks")
+    @JsonIgnore
     private List<PersonModel> assignedPersons;
 
 }
