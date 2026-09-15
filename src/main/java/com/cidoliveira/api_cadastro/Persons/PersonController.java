@@ -21,8 +21,8 @@ public class PersonController {
 
     //Add person
     @PostMapping("/create")
-    public String createPerson() {
-        return "Person created in database";
+    public PersonModel createPerson(@RequestBody PersonModel personModel) {
+        return personService.createPerson(personModel);
     }
 
     //Show every person
@@ -38,7 +38,7 @@ public class PersonController {
     }
 
     //Change person data
-    @PutMapping("/changedataID")
+    @PutMapping("/changedata/{id}")
     public String changeDataByID() {
         return "Changing person data by ID";
     }

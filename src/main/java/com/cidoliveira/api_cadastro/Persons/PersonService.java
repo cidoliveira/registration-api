@@ -23,4 +23,8 @@ public class PersonService {
         return personModel.orElse(null);
     }
 
+    public PersonModel createPerson(PersonModel person) {
+        return personRepository.save(person);
+    }
+
 }
