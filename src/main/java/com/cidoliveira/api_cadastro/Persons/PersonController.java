@@ -39,8 +39,8 @@ public class PersonController {
 
     //Change person data
     @PutMapping("/changedata/{id}")
-    public String changeDataByID() {
-        return "Changing person data by ID";
+    public PersonModel changeDataByID(@PathVariable Long id, @RequestBody PersonModel updatedPerson) {
+        return personService.changePersonDataByID(id, updatedPerson);
     }
 
     //Delete person
