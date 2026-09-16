@@ -10,6 +10,7 @@ public class PersonController {
 
     private PersonService personService;
 
+
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
@@ -21,25 +22,25 @@ public class PersonController {
 
     //Add person
     @PostMapping("/create")
-    public PersonModel createPerson(@RequestBody PersonModel personModel) {
-        return personService.createPerson(personModel);
+    public PersonDTO createPerson(@RequestBody PersonDTO person) {
+        return personService.createPerson(person);
     }
 
     //Show every person
     @GetMapping("/getall")
-    public List<PersonModel> getAll() {
+    public List<PersonDTO> getAll() {
         return personService.listEveryPerson();
     }
 
     //Search person by ID
     @GetMapping("/getperson/{id}")
-    public PersonModel getPersonByID(@PathVariable Long id) {
+    public PersonDTO getPersonByID(@PathVariable Long id) {
         return personService.listPersonByID(id);
     }
 
     //Change person data
     @PutMapping("/changedata/{id}")
-    public PersonModel changeDataByID(@PathVariable Long id, @RequestBody PersonModel updatedPerson) {
+    public PersonDTO changeDataByID(@PathVariable Long id, @RequestBody PersonDTO updatedPerson) {
         return personService.changePersonDataByID(id, updatedPerson);
     }
 

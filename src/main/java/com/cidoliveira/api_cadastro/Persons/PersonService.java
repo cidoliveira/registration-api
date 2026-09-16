@@ -2,31 +2,40 @@ package com.cidoliveira.api_cadastro.Persons;
 
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
     private PersonRepository personRepository;
+    private PersonMapper personMapper;
 
-    public PersonService(PersonRepository personRepository) {
+    public PersonService(PersonRepository personRepository, PersonMapper personMapper) {
         this.personRepository = personRepository;
+        this.personMapper = personMapper;
     }
 
     //List every person
-    public List<PersonModel> listEveryPerson() {
-        return personRepository.findAll();
+    public List<PersonDTO> listEveryPerson() {
+        List<PersonModel> persons = personRepository.findAll();
+        return persons.stream()
+                .map(personMapper::map)
+                .collect(Collectors.toList());
     }
 
     //List person by ID
-    public PersonModel listPersonByID(Long id) {
-        Optional<PersonModel> personModel = personRepository.findById(id);
-        return personModel.orElse(null);
+    public PersonDTO listPersonByID(Long id) {
+        Optional<PersonModel> personID = personRepository.findById(id);
+        return personID.map(personMapper::map).orElse(null);
     }
 
     //Create new person
-    public PersonModel createPerson(PersonModel person) {
-        return personRepository.save(person);
+    public PersonDTO createPerson(PersonDTO personDTO) {
+        PersonModel person = personMapper.map(personDTO);
+        person = personRepository.save(person);
+        return personMapper.map(person);
     }
 
     //Delete person by ID
@@ -35,10 +44,13 @@ public class PersonService {
     }
 
     //Update person
-    public PersonModel changePersonDataByID(Long id, PersonModel updatedPerson) {
-        if (personRepository.existsById(id)) {
+    public PersonDTO changePersonDataByID(Long id, PersonDTO personDTO) {
+        Optional<PersonModel> existingPerson = personRepository.findById(id);
+        if (existingPerson.isPresent()) {
+            PersonModel updatedPerson = personMapper.map(personDTO);
             updatedPerson.setPersonId(id);
-            return personRepository.save(updatedPerson);
+            PersonModel savedPerson = personRepository.save(updatedPerson);
+            return personMapper.map(savedPerson);
         }
         return null;
     }
