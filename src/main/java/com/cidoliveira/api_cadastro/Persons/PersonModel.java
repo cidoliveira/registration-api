@@ -31,4 +31,7 @@ public class PersonModel {
     @JoinColumn(name = "tasks_id")
     private TasksModel userTasks;
 
+    @Column(name = "person_profession")
+    private String personProfession;
+
 }
