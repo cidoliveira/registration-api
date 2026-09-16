@@ -1,8 +1,12 @@
 package com.cidoliveira.api_cadastro.Persons;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/persons")
@@ -22,32 +26,50 @@ public class PersonController {
 
     //Add person
     @PostMapping("/create")
-    public PersonDTO createPerson(@RequestBody PersonDTO person) {
-        return personService.createPerson(person);
+    public ResponseEntity<String> createPerson(@RequestBody PersonDTO person) {
+        PersonDTO newPerson = personService.createPerson(person);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Person successfully created: " + newPerson.getPersonName() + ". (ID): " + newPerson.getPersonId());
     }
 
     //Show every person
     @GetMapping("/getall")
-    public List<PersonDTO> getAll() {
-        return personService.listEveryPerson();
+    public ResponseEntity<List<PersonDTO>> getAll() {
+        List<PersonDTO> personDTOList = personService.listEveryPerson();
+        return ResponseEntity.ok(personDTOList);
     }
 
     //Search person by ID
     @GetMapping("/getperson/{id}")
-    public PersonDTO getPersonByID(@PathVariable Long id) {
-        return personService.listPersonByID(id);
+    public ResponseEntity<?> getPersonByID(@PathVariable Long id) {
+        PersonDTO person = personService.listPersonByID(id);
+        if (person != null) {
+            return ResponseEntity.ok(person);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("The person with ID " + id + " has not been found.");
     }
 
     //Change person data
     @PutMapping("/changedata/{id}")
-    public PersonDTO changeDataByID(@PathVariable Long id, @RequestBody PersonDTO updatedPerson) {
-        return personService.changePersonDataByID(id, updatedPerson);
+    public ResponseEntity<?> changeDataByID(@PathVariable Long id, @RequestBody PersonDTO updatedPerson) {
+        if (personService.listPersonByID(id) != null) {
+            personService.changePersonDataByID(id, updatedPerson);
+            return ResponseEntity.ok("Person with ID " + id + " data has been changed.");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("The person with ID " + id + " has not been found.");
     }
 
     //Delete person
     @DeleteMapping("/delete/{id}")
-    public void deletePersonById(@PathVariable Long id) {
-        personService.deletePersonByID(id);
+    public ResponseEntity<String> deletePersonById(@PathVariable Long id) {
+        if (personService.listPersonByID(id) != null) {
+            personService.deletePersonByID(id);
+            return ResponseEntity.ok("Person with ID " + id + " deleted from database with success.");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("The person with ID " + id + " has not been found.");
     }
 
 }
