@@ -14,7 +14,7 @@ public class PersonDTO {
     private Long personId;
     private String personName;
     private String personEmail;
-    private int personAge;
+    private Integer personAge;
     private TasksModel userTasks;
     private String personProfession;
 

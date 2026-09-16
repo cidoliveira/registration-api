@@ -25,7 +25,7 @@ public class PersonModel {
     private String personEmail;
 
     @Column(name = "person_age")
-    private int personAge;
+    private Integer personAge;
 
     @ManyToOne
     @JoinColumn(name = "tasks_id")
