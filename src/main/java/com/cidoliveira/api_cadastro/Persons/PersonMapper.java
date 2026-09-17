@@ -1,7 +1,5 @@
 package com.cidoliveira.api_cadastro.Persons;
 
-import com.cidoliveira.api_cadastro.Tasks.TasksModel;
-import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
 @Component
