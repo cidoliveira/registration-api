@@ -1,9 +1,12 @@
 package com.cidoliveira.api_cadastro.Tasks;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class TasksService {
     private final TasksRepository tasksRepository;
     private final TasksMapper tasksMapper;

@@ -1,5 +1,8 @@
 package com.cidoliveira.api_cadastro.Tasks;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TasksMapper {
     public TasksModel map(TasksDTO tasksDTO) {
         TasksModel tasksModel = new TasksModel();
