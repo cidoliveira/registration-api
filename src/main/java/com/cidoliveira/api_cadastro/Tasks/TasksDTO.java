@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TasksDTO {
-    private long taskId;
+    private Long taskId;
     private String taskName;
     private String taskDifficulty;
     private List<PersonModel> assignedPersons;
